@@ -1,0 +1,150 @@
+{
+  "info": {
+    "_postman_id": "773995b2-f0ce-4bfa-ae55-cb72f80bac69",
+    "name": "Proyecto",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54487337",
+    "_collection_link": "https://go.postman.co/collection/54487337-773995b2-f0ce-4bfa-ae55-cb72f80bac69?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "crear",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"E-Commerce Plataforma\",\r\n    \"descripcion\": \"Desarrollo \",\r\n    \"fechaInicio\": \"2025-06-20\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8097/api/proyectos",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8097",
+          "path": [
+            "api",
+            "proyectos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "listar",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"Diana Rojas\",\r\n    \"cargo\": \"Desarrollador Senior\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8097/api/proyectos",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8097",
+          "path": [
+            "api",
+            "proyectos"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "buscar",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"nombre\": \"Diana Rojas\",\r\n    \"cargo\": \"Desarrollador Senior\"\r\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8097/api/proyectos/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8097",
+          "path": [
+            "api",
+            "proyectos",
+            "2"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "actualizar",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": " {\r\n        \"id\": 1,\r\n        \"nombre\": \"E-Commerce \",\r\n        \"description\": null,\r\n        \"fechaInicio\": \"2026-05-20\"\r\n    }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8097/api/proyectos/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8097",
+          "path": [
+            "api",
+            "proyectos",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": " {\r\n        \"id\": 1,\r\n        \"nombre\": \"E-Commerce \",\r\n        \"description\": null,\r\n        \"fechaInicio\": \"2026-05-20\"\r\n    }"
+        },
+        "url": {
+          "raw": "http://localhost:8097/api/proyectos/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8097",
+          "path": [
+            "api",
+            "proyectos",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "info": {
+    "_postman_id": "77bc478a-cbac-4c10-961a-37111de3c39e",
+    "name": "Tarea",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54487337",
+    "_collection_link": "https://go.postman.co/collection/54487337-77bc478a-cbac-4c10-961a-37111de3c39e?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "New Request",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"descripcion\": \"Diseñar e implementar el modelo de datos para la base de datos\",\r\n  \"fechaLimite\": \"2026-06-15\",\r\n  \"costoEstimado\": 450.50,\r\n  \"proyecto\": {\r\n    \"id\": 1\r\n  },\r\n  \"empleados\": [\r\n    {\r\n      \"id\": 1\r\n    }\r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8097/api/tareas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8097",
+          "path": [
+            "api",
+            "tareas"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8097/api/tareas",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8097",
+          "path": [
+            "api",
+            "tareas"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
