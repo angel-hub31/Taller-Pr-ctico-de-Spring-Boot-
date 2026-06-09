@@ -5,6 +5,7 @@ import com.krakedev.proyectos.services.ProyectoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,6 +16,7 @@ public class ProyectoController {
 	private ProyectoService proyectoService;
 
 	@GetMapping
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	public ResponseEntity<?> listar() {
 		try {
 			return ResponseEntity.ok(proyectoService.obtenerTodos());
@@ -24,6 +26,7 @@ public class ProyectoController {
 	}
 
 	@GetMapping("/{id}")
+	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
 	public ResponseEntity<?> buscarPorId(@PathVariable int id) {
 		try {
 			Proyecto p = proyectoService.obtenerPorId(id);
@@ -34,6 +37,7 @@ public class ProyectoController {
 	}
 
 	@PostMapping
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> crear(@RequestBody Proyecto proyecto) {
 		try {
 			return ResponseEntity.status(HttpStatus.CREATED).body(proyectoService.guardar(proyecto));
@@ -43,6 +47,7 @@ public class ProyectoController {
 	}
 
 	@PutMapping("/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> actualizar(@PathVariable int id, @RequestBody Proyecto proyecto) {
 		try {
 			proyecto.setId(id);
@@ -53,12 +58,15 @@ public class ProyectoController {
 	}
 
 	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> eliminar(@PathVariable int id) {
 		try {
 			proyectoService.eliminar(id);
-			return ResponseEntity.noContent().build();
+			return ResponseEntity.ok("Proyecto eliminado correctamente");
 		} catch (Exception e) {
+		 
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+
 		}
 	}
 }
