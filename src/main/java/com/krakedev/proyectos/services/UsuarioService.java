@@ -36,4 +36,9 @@ public class UsuarioService {
         
         return usuario;
     }
+    public Usuario obtenerPerfilUsuario(String username) throws Exception {
+        return usuarioRepository.findByUsername(username)
+                .orElseThrow(() -> new Exception("Usuario no encontrado con el username: " + username));
+    }
+    
 }
