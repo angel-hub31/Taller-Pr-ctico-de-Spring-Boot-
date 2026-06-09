@@ -45,14 +45,17 @@ public class AuthController {
 			String token = jwtUtil.generarToken(usuarioAutenticado.getUsername(), usuarioAutenticado.getRol());
 
 			Map<String, String> respuesta = new HashMap<>();
-			respuesta.put("token", token);
+			
 			respuesta.put("username", usuarioAutenticado.getUsername());
 			respuesta.put("rol", usuarioAutenticado.getRol());
+			respuesta.put("token", token);
 
 			return ResponseEntity.ok(respuesta);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Error de autenticación: " + e.getMessage());
-		}
+			Map<String, String> errorResponse = new HashMap<>();
+	        errorResponse.put("error", e.getMessage());
+			
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);		}
 	}
 
 	@PostMapping("/logout")
