@@ -1,0 +1,79 @@
+{
+  "info": {
+    "_postman_id": "0254c382-3850-4cf6-8922-163efa2f1cab",
+    "name": "AuthSecurity",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54487337",
+    "_collection_link": "https://go.postman.co/collection/54487337-0254c382-3850-4cf6-8922-163efa2f1cab?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Registrar",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"angel_user\",\r\n    \"password\": \"clave123\",\r\n    \"rol\": \"USER\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8097/api/auth/registrar",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8097",
+          "path": [
+            "api",
+            "auth",
+            "registrar"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"angel_user\",\r\n    \"password\": \"clave123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8097/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8097",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    }
+  ]
+}
