@@ -22,4 +22,18 @@ public class UsuarioService {
     public Optional<Usuario> buscarPorUsername(String username) {
         return usuarioRepository.findByUsername(username);
     }
+    public Usuario login(String username, String password) throws Exception {
+        Optional<Usuario> usuarioOpt = usuarioRepository.findByUsername(username);
+        if (usuarioOpt.isEmpty()) {
+            throw new Exception("Credenciales incorrectas (Usuario no encontrado)");
+        }
+        
+        Usuario usuario = usuarioOpt.get();
+        
+        if (!BCrypt.checkpw(password, usuario.getPassword())) {
+            throw new Exception("Credenciales incorrectas (Contraseña inválida)");
+        }
+        
+        return usuario;
+    }
 }

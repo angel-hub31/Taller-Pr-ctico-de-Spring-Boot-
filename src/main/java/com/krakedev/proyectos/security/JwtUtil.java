@@ -26,4 +26,11 @@ public class JwtUtil {
 		JWTVerifier verificador = JWT.require(algoritmo).build();
 		return verificador.verify(token);
 	}
+	public String obtenerUsername(String token) {
+		return validarToken(token).getSubject();
+	}
+
+	public String obtenerRol(String token) {
+		return validarToken(token).getClaim("rol").asString();
+	}
 }
