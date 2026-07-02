@@ -20,6 +20,10 @@ public class Tarea {
 
 	@Column(nullable = false)
 	private double costoEstimado;
+	
+	@Column(nullable = false, length = 20)
+	private String prioridad;
+
 
 	@ManyToOne
 	@JoinColumn(name = "proyecto_id", nullable = false)
@@ -34,12 +38,13 @@ public class Tarea {
 	}
 
 	// Constructor con parámetros
-	public Tarea(int id, String descripcion, LocalDate fechaLimite, double costoEstimado, Proyecto proyecto,
+	public Tarea(int id, String descripcion, LocalDate fechaLimite, double costoEstimado,String prioridad, Proyecto proyecto,
 			List<Empleado> empleados) {
 		this.id = id;
 		this.descripcion = descripcion;
 		this.fechaLimite = fechaLimite;
 		this.costoEstimado = costoEstimado;
+		this.prioridad = prioridad;
 		this.proyecto = proyecto;
 		this.empleados = empleados;
 	}
@@ -76,6 +81,16 @@ public class Tarea {
 	public void setCostoEstimado(double costoEstimado) {
 		this.costoEstimado = costoEstimado;
 	}
+	
+	//nuevos getters y setters
+	public String getPrioridad() {
+		return prioridad;
+	}
+
+	public void setPrioridad(String prioridad) {
+		this.prioridad = prioridad;
+	}
+
 
 	public Proyecto getProyecto() {
 		return proyecto;
