@@ -37,7 +37,7 @@ public class SecurityConfig {
 
             // 3. Autorización de rutas:
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/registrar", "/api/auth/login").permitAll() // Públicas
+                .requestMatchers("/api/auth/registrar", "/api/auth/login","/api/proyectos/publico/resumen").permitAll() // Públicas
                 .anyRequest().authenticated() // Todo lo demás requiere autenticación
             );
 

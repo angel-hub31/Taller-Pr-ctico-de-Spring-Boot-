@@ -35,4 +35,10 @@ public class ProyectoService {
     public void eliminar(int id) {
         proyectoRepository.deleteById(id);
     }
+    
+    public long contarProyectos() {
+
+        return proyectoRepository.count();
+
+    }
 }

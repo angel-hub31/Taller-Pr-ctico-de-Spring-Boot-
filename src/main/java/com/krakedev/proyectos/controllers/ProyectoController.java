@@ -8,6 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap; 
+import java.util.Map;     
+
+
 @RestController//Es una anotación compuesta que le indica a Spring que esta clase es un controlador web.
 @RequestMapping("/api/proyectos") // Base para todas las rutas de este controlador
 public class ProyectoController {
@@ -71,5 +75,23 @@ public class ProyectoController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
+    }
+    
+    
+    @GetMapping("/publico/resumen")
+    public ResponseEntity<?> resumenPublico() {
+
+
+        Map<String, Object> respuesta = new HashMap<>();
+
+
+        respuesta.put(
+                "cantidadProyectos",
+                proyectoService.contarProyectos()
+        );
+
+
+        return ResponseEntity.ok(respuesta);
+
     }
 }
