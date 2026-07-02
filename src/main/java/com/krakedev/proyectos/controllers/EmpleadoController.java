@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController//Es una anotación compuesta que le indica a Spring que esta clase es un controlador web.
 @RequestMapping("/api/empleados")//Cualquier petición web que llegue con la ruta
+
+@CrossOrigin(origins = "http://localhost:5173", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowedHeaders = {"Authorization", "Content-Type"})
 public class EmpleadoController {
 
     @Autowired

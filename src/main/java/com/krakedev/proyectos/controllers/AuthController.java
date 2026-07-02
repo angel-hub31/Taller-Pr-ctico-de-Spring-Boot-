@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/auth") // Define la ruta base para todos los endpoints de autenticación
+
+@CrossOrigin(origins = "http://localhost:5173", methods = {RequestMethod.POST}, allowedHeaders = {"Authorization", "Content-Type"})
 public class AuthController {
 
     // Inyección de dependencias para los servicios de lógica y seguridad

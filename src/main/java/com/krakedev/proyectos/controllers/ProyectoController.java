@@ -14,6 +14,8 @@ import java.util.Map;
 
 @RestController//Es una anotación compuesta que le indica a Spring que esta clase es un controlador web.
 @RequestMapping("/api/proyectos") // Base para todas las rutas de este controlador
+
+@CrossOrigin(origins = "http://localhost:5173", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}, allowedHeaders = {"Authorization", "Content-Type"})
 public class ProyectoController {
 
     @Autowired
