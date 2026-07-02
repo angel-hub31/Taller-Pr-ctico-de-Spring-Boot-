@@ -9,29 +9,31 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/tareas")
+@RequestMapping("/api/tareas") // Ruta base para gestionar tareas
 public class TareaController {
 
-	@Autowired
-	private TareaService tareaService;
+    @Autowired
+    private TareaService tareaService;
 
-	@GetMapping
-	@PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-	public ResponseEntity<?> listar() {
-		try {
-			return ResponseEntity.ok(tareaService.obtenerTodas());
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-	}
+    // GET: Obtiene la lista completa de tareas. Permitido para ADMIN y USER
+    @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    public ResponseEntity<?> listar() {
+        try {
+            return ResponseEntity.ok(tareaService.obtenerTodas());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 
-	@PostMapping
-	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> crear(@RequestBody Tarea tarea) {
-		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(tareaService.guardar(tarea));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-	}
+    // POST: Crea una nueva tarea. Restringido solo para ADMIN
+    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> crear(@RequestBody Tarea tarea) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(tareaService.guardar(tarea));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 }

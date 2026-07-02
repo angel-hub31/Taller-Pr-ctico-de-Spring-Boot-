@@ -4,3 +4,4 @@ CREATE TABLE usuarios (
     password VARCHAR(100) NOT NULL,
     rol VARCHAR(20) NOT NULL
 );
+select * from usuarios;

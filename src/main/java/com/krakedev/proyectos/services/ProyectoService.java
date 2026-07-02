@@ -6,25 +6,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+/**
+ * @Service: Marca esta clase como un componente de servicio, 
+ * encargada de gestionar la lógica de negocio para los proyectos.
+ */
 @Service
 public class ProyectoService {
 
-	@Autowired
-	private ProyectoRepository proyectoRepository;
+    @Autowired
+    private ProyectoRepository proyectoRepository;
 
-	public List<Proyecto> obtenerTodos() {
-		return proyectoRepository.findAll();
-	}
+    // Obtiene todos los proyectos almacenados en la base de datos
+    public List<Proyecto> obtenerTodos() {
+        return proyectoRepository.findAll();
+    }
 
-	public Proyecto obtenerPorId(int id) {
-		return proyectoRepository.findById(id).orElse(null);
-	}
+    // Busca un proyecto por ID. Devuelve el proyecto si existe, o null si no.
+    public Proyecto obtenerPorId(int id) {
+        return proyectoRepository.findById(id).orElse(null);
+    }
 
-	public Proyecto guardar(Proyecto proyecto) {
-		return proyectoRepository.save(proyecto);
-	}
+    // Guarda un nuevo proyecto o actualiza uno existente mediante el ID
+    public Proyecto guardar(Proyecto proyecto) {
+        return proyectoRepository.save(proyecto);
+    }
 
-	public void eliminar(int id) {
-		proyectoRepository.deleteById(id);
-	}
+    // Elimina un proyecto de la base de datos utilizando su identificador
+    public void eliminar(int id) {
+        proyectoRepository.deleteById(id);
+    }
 }

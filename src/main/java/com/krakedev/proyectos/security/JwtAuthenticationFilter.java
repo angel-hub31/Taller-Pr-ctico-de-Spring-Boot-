@@ -16,14 +16,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.util.Collections;
 
+// Se ejecuta una vez por cada petición HTTP que llega al servidor
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-	@Autowired
-	private JwtUtil jwtUtil;
-
-	@Autowired
-	private TokenBlacklistService tokenBlacklistService;
+	@Autowired private JwtUtil jwtUtil;
+	@Autowired private TokenBlacklistService tokenBlacklistService;
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -31,39 +29,40 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 		String authHeader = request.getHeader("Authorization");
 
+		// Verifica si la petición incluye un token Bearer
 		if (authHeader != null && authHeader.startsWith("Bearer ")) {
-			String token = authHeader.substring(7);
+			String token = authHeader.substring(7); // Quita el prefijo "Bearer "
 
 			try {
+				// 1. Verifica si el token está en la lista negra (logout previo)
 				if (tokenBlacklistService.esTokenInvalido(token)) {
 					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-					response.setContentType("text/plain;charset=UTF-8");
-					response.getWriter().write("Token inválido: La sesión ha sido cerrada previamente (Blacklisted).");
+					response.getWriter().write("Token en lista negra.");
 					return;
 				}
 
+				// 2. Valida el token y extrae información (usuario y rol)
 				DecodedJWT decodedJWT = jwtUtil.validarToken(token);
 				String username = decodedJWT.getSubject();
 				String rol = decodedJWT.getClaim("rol").asString();
 
+				// 3. Si es válido y no hay sesión activa, establece la autenticación en el contexto de Spring
 				if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
 					SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + rol);
-
 					UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 							username, null, Collections.singletonList(authority));
-
+					
 					SecurityContextHolder.getContext().setAuthentication(authentication);
 				}
 
 			} catch (Exception e) {
+				// Si el token es inválido o expiró, bloquea la petición
 				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-				response.setContentType("text/plain;charset=UTF-8");
-				response.getWriter().write("Error de autenticación: Token inválido o expirado. " + e.getMessage());
 				return;
 			}
 		}
 
+		// Continúa con el siguiente filtro en la cadena de seguridad de Spring
 		filterChain.doFilter(request, response);
 	}
 }
